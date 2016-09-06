@@ -276,6 +276,7 @@ class IQOptionAPI(object):
         """Method for connection to IQ Option API."""
         response = self.login(self.username, self.password) # pylint: disable=not-callable
         ssid = response.cookies["ssid"]
+        self.account_details = response.json().get('result')
         self.set_session_cookies()
         self.websocket_client = WebsocketClient(self)
 
