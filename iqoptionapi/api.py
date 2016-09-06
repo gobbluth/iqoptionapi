@@ -215,6 +215,15 @@ class IQOptionAPI(object):
         return Getprofile(self)
 
     @property
+    def getoptions(self):
+        """Property for get IQ Option http getoptions resource.
+
+        :returns: The instance of
+            :class:`Login <iqoptionapi.http.getoptions.Getoptions>`.
+        """
+        return Getoptions(self)
+
+    @property
     def ssid(self):
         """Property for get IQ Option websocket ssid chanel.
 
