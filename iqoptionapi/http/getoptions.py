@@ -2,7 +2,7 @@
 """Module for IQ Option http getpositions resource."""
 
 from iqoptionapi.http.resource import Resource
-from iqoptionapi.http.register import Game
+from iqoptionapi.http.game import Game
 
 
 class Getoptions(Resource):
