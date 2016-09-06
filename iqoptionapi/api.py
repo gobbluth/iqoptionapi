@@ -282,7 +282,13 @@ class IQOptionAPI(object):
         websocket_thread = threading.Thread(target=self.websocket.run_forever)
         websocket_thread.daemon = True
         websocket_thread.start()
-
         time.sleep(5)
-
         self.ssid(ssid) # pylint: disable=not-callable
+
+    def get_active_ids(self):
+        url = 'https://eu.iqoption.com/api/active'
+        symbols = self.session.get(url).json().get('result')
+        active_ids = {}
+        for symbol in symbols:
+            active_ids[symbol['name'].lower()] = symbol['id'] 
+        return active_ids
