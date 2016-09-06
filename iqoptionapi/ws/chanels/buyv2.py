@@ -18,12 +18,29 @@ class Buyv2(Base):
         :param option: The buying option.
         :param direction: The buying direction.
         """
+        current_time = self.api.timesync.server_timestamp 
+        nearest = 5 if option == 'turbo' else 15
+        
+        def round_up(tm, nearest):
+            upmins = math.ceil(float(tm.minute)/nearest)*nearest
+            diffmins = upmins - tm.minute
+            newtime = tm + datetime.timedelta(minutes=diffmins)
+            newtime = newtime.replace(second=0)
+            return newtime
+
+        c = datetime.datetime.fromtimestamp(current_time) 
+        requested_exp = c + datetime.timedelta(minutes=duration) 
+        expiration_time = int(time.mktime(round_up(requested_exp, nearest).timetuple()))
+
+        c = datetime.datetime.fromtimestamp(current_time) 
+        e = datetime.datetime.fromtimestamp(expiration_time)
+
         data = {"price": price,
                 "act": active,
-                "exp": self.api.timesync.expiration_timestamp,
+                "exp": expiration_time,
                 "type": option,
                 "direction": direction,
-                "time": self.api.timesync.server_timestamp
+                "time": current_time,
+                "user_balance_id": self.api.balance_id,
                }
-
         self.send_websocket_request(self.name, data)
