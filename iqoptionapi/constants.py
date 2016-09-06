@@ -92,5 +92,5 @@ ACTIVES = {
   "NIKE": 54, 
   "EURAUD": 108, 
   "MCDON": 52, 
-  "CITI": 45
+  "CITI": 45,
 }
