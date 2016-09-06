@@ -283,7 +283,6 @@ class IQOptionAPI(object):
         websocket_thread = threading.Thread(target=self.websocket.run_forever)
         websocket_thread.daemon = True
         websocket_thread.start()
-        time.sleep(5)
         self.ssid(ssid) # pylint: disable=not-callable
 
     def get_active_ids(self):
