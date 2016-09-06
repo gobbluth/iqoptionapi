@@ -4,6 +4,7 @@
 from iqoptionapi.ws.chanels.base import Base
 import datetime
 import time
+import math
 
 class Buyv2(Base):
     """Class for IQ option buy websocket chanel."""
