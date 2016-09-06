@@ -15,7 +15,7 @@ class Getoptions(Resource):
         """Send get request for IQ Option API getoptions http resource.
         :returns: The instace of :class:`requests.Response`.
         """
-        params = dict('user_balance_id', balance_id)
+        params = dict(user_balance_id=balance_id)
         return self.send_http_request("GET", params=params)
 
     def __call__(self, balance_id):
