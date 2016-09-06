@@ -23,6 +23,11 @@ class Buyv2(Base):
         current_time = self.api.timesync.server_timestamp 
         nearest = 5 if option == 'turbo' else 15
         
+        # endpoints must be less than 5 or > 15 
+        if 5 < duration < 15:
+            duration = 15
+            nearest = 15
+        
         def round_up(tm, nearest):
             upmins = math.ceil(float(tm.minute)/nearest)*nearest
             diffmins = upmins - tm.minute
@@ -31,18 +36,19 @@ class Buyv2(Base):
             return newtime
 
         c = datetime.datetime.fromtimestamp(current_time) 
-        requested_exp = c + datetime.timedelta(minutes=duration) 
+        tm = datetime.timedelta(minutes=duration)
+        requested_exp = c + tm 
         expiration_time = int(time.mktime(round_up(requested_exp, nearest).timetuple()))
-
         c = datetime.datetime.fromtimestamp(current_time) 
         e = datetime.datetime.fromtimestamp(expiration_time)
 
-        data = {"price": price,
-                "act": active,
-                "exp": expiration_time,
-                "type": option,
-                "direction": direction,
-                "time": current_time,
-                "user_balance_id": self.api.balance_id,
-               }
+        data = {
+            "price": price,
+            "act": active,
+            "exp": expiration_time,
+            "type": option,
+            "direction": direction,
+            "time": current_time,
+            "user_balance_id": self.api.balance_id,
+        }
         self.send_websocket_request(self.name, data)
