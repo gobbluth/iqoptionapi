@@ -10,6 +10,7 @@ import requests
 from iqoptionapi.http.login import Login
 from iqoptionapi.http.loginv2 import Loginv2
 from iqoptionapi.http.getprofile import Getprofile
+from iqoptionapi.http.getoptions import Getoptions
 from iqoptionapi.http.auth import Auth
 from iqoptionapi.http.token import Token
 from iqoptionapi.http.appinit import Appinit
