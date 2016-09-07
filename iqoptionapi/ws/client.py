@@ -35,6 +35,8 @@ class WebsocketClient(object):
 
         if message["name"] == "candles":
             self.api.candles.candles_data = message["msg"]["data"]
+            
+        self.latest_message = message
 
     @staticmethod
     def on_error(wss, error):
