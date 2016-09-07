@@ -22,6 +22,7 @@ class Buyv2(Base):
         """
         current_time = self.api.timesync.server_timestamp 
         nearest = duration if option == 'turbo' else 15
+        if nearest == 1: nearest = 2
         
         # endpoints must be less than 5 or > 15 
         if 5 < duration < 15:
