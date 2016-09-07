@@ -21,7 +21,7 @@ class Buyv2(Base):
         :param direction: The buying direction.
         """
         current_time = self.api.timesync.server_timestamp 
-        nearest = 5 if option == 'turbo' else 15
+        nearest = duration if option == 'turbo' else 15
         
         # endpoints must be less than 5 or > 15 
         if 5 < duration < 15:
