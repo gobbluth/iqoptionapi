@@ -20,7 +20,8 @@ class Buyv2(Base):
         :param option: The buying option.
         :param direction: The buying direction.
         """
-        current_time = self.api.timesync.server_timestamp 
+        #current_time = self.api.timesync.server_timestamp 
+        current_time = int(time.time())
         nearest = duration if option == 'turbo' else 15
         if nearest == 1: nearest = 2
         
