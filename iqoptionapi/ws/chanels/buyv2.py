@@ -35,13 +35,13 @@ class Buyv2(Base):
             newtime = tm + datetime.timedelta(minutes=diffmins)
             newtime = newtime.replace(second=0)
             return newtime
-
+        
         c = datetime.datetime.fromtimestamp(current_time) 
         tm = datetime.timedelta(minutes=duration)
         requested_exp = c + tm 
         expiration_time = int(time.mktime(round_up(requested_exp, nearest).timetuple()))
         e = datetime.datetime.fromtimestamp(expiration_time)
-        
+        if (c - e).total_seconds() < 60: expiration_time += 60
 
         data = {
             "price": price,
