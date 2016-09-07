@@ -20,8 +20,9 @@ class Buyv2(Base):
         :param option: The buying option.
         :param direction: The buying direction.
         """
-        current_time = self.api.timesync.server_timestamp 
-        nearest = 5 if option == 'turbo' else 15
+        #current_time = self.api.timesync.server_timestamp 
+        current_time = time.gmtime()
+        nearest = duration if option == 'turbo' else 15
         
         # endpoints must be less than 5 or > 15 
         if 5 < duration < 15:
@@ -40,7 +41,7 @@ class Buyv2(Base):
         requested_exp = c + tm 
         expiration_time = int(time.mktime(round_up(requested_exp, nearest).timetuple()))
         e = datetime.datetime.fromtimestamp(expiration_time)
-        print 'DIFFL:', (c - e).total_seconds()
+        
 
         data = {
             "price": price,
